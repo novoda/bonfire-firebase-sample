@@ -1,0 +1,12 @@
+.idea
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+app/google-services.json
+*.keystore
+signing.properties
