@@ -22,7 +22,10 @@ It was built by a joint team working on the [iOS][2] and the [Android][3] versio
 <a href="https://play.google.com/store/apps/details?id=com.novoda.bonfire&amp;utm_source=global_co&amp;utm_medium=prtnr&amp;utm_content=Mar2515&amp;utm_campaign=PartBadge&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" style="border: 0 none;"><img width="25%" height="25%" style="vertical-align:middle;text-decoration: none;" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"></a>
 <br/>
 <sub>Android, Google Play and the Google Play logo are trademarks of Google Inc.</sub>
+<br/>
+The iOS app hasn’t made it through the app review process, but you can [sign up to our beta][4]
 
 [1]: https://firebase.google.com/
 [2]: /ios
 [3]: /android
+[4]: https://docs.google.com/forms/d/1UGU1w4QohXgyFKFN1panr_2r1R5FxVEPGfJ-uNtEoPE/viewform

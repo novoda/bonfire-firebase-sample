@@ -8,6 +8,8 @@ Bonfire is built on top of the new [Firebase](https://firebase.google.com/) from
 
 If you are interested in the Android version, you can find more information about it [here](/android).
 
+The iOS app hasn’t made it through the app review process, but you can [sign up to our beta](https://docs.google.com/forms/d/1UGU1w4QohXgyFKFN1panr_2r1R5FxVEPGfJ-uNtEoPE/viewform)
+
 ### Requirements
 * Xcode 7.3
 * Swift 2.2
