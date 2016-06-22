@@ -6,7 +6,7 @@ Awesome chat app where you can discuss your favorite emoji.
 
 Bonfire is built on top of the new [Firebase](https://firebase.google.com/) from Google.
 
-If you are interested in the Android version, you can find more information about it [here](https://github.com/novoda/spikes/tree/firebase/develop/Firebase/android).
+If you are interested in the Android version, you can find more information about it [here](/android).
 
 ### Requirements
 * Xcode 7.3

@@ -44,5 +44,5 @@ If you are interested in the iOS version, you can find more information about it
 
 
 [1]: https://firebase.google.com/
-[2]: https://github.com/novoda/spikes/tree/firebase/develop/Firebase/ios
+[2]: /ios
 [3]: https://console.firebase.google.com

@@ -24,5 +24,5 @@ It was built by a joint team working on the [iOS][2] and the [Android][3] versio
 <sub>Android, Google Play and the Google Play logo are trademarks of Google Inc.</sub>
 
 [1]: https://firebase.google.com/
-[2]: https://github.com/novoda/spikes/tree/firebase/develop/Firebase/ios
-[3]: https://github.com/novoda/spikes/tree/firebase/develop/Firebase/android
+[2]: /ios
+[3]: /android
