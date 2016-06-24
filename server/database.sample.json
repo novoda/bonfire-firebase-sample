@@ -1,0 +1,356 @@
+{
+  "channels" : {
+    "⏳" : {
+      "access" : "private",
+      "name" : "⏳",
+      "private" : true
+    },
+    "♉" : {
+      "access" : "public",
+      "name" : "♉",
+      "private" : false
+    },
+    "✡" : {
+      "access" : "public",
+      "name" : "✡"
+    },
+    "➰" : {
+      "access" : "private",
+      "name" : "➰"
+    },
+    "🇨🇿" : {
+      "access" : "public",
+      "name" : "🇨🇿",
+      "private" : false
+    },
+    "🇪🇺" : {
+      "access" : "public",
+      "name" : "🇪🇺",
+      "private" : false
+    },
+    "🇫🇷" : {
+      "access" : "public",
+      "name" : "🇫🇷",
+      "private" : false
+    },
+    "🇬🇧" : {
+      "access" : "public",
+      "name" : "🇬🇧",
+      "private" : false
+    },
+    "🇬🇷" : {
+      "access" : "public",
+      "name" : "🇬🇷"
+    },
+    "🐱" : {
+      "access" : "private",
+      "name" : "🐱",
+      "private" : true
+    },
+    "📶" : {
+      "access" : "public",
+      "name" : "📶",
+      "private" : false
+    },
+    "🔥" : {
+      "access" : "private",
+      "name" : "🔥",
+      "private" : true
+    },
+    "🔱" : {
+      "access" : "public",
+      "name" : "🔱",
+      "private" : false
+    },
+    "🙄" : {
+      "access" : "public",
+      "name" : "🙄",
+      "private" : false
+    },
+    "🙅" : {
+      "access" : "private",
+      "name" : "🙅"
+    },
+    "🤐" : {
+      "access" : "public",
+      "name" : "🤐",
+      "private" : false
+    }
+  },
+  "messages" : {
+    "⏳" : {
+      "-KJ_gglPD2RXoyRQpCPa" : {
+        "author" : {
+          "id" : "L9uAdEnVUmUervsmBCN1iNnNO2j2",
+          "name" : "Carl-Gustaf Harroch",
+          "photoUrl" : "https://lh6.googleusercontent.com/-PxDRhzqnR40/AAAAAAAAAAI/AAAAAAAACpQ/h_4OozlarA8/s96-c/photo.jpg"
+        },
+        "body" : "cool",
+        "timestamp" : 1465216323526
+      }
+    },
+    "♉" : {
+      "-KJ_gXw0nWfQ6Dypwy8W" : {
+        "author" : {
+          "id" : "L9uAdEnVUmUervsmBCN1iNnNO2j2",
+          "name" : "Carl-Gustaf Harroch",
+          "photoUrl" : "https://lh6.googleusercontent.com/-PxDRhzqnR40/AAAAAAAAAAI/AAAAAAAACpQ/h_4OozlarA8/s96-c/photo.jpg"
+        },
+        "body" : "gty",
+        "timestamp" : 1465216283244
+      },
+      "-KJ_gZL0QxDrGUH_vI1P" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "Hey ",
+        "timestamp" : 1465216287847
+      },
+      "-KJ_gZwsXgzpwIhv0jrz" : {
+        "author" : {
+          "id" : "L9uAdEnVUmUervsmBCN1iNnNO2j2",
+          "name" : "Carl-Gustaf Harroch",
+          "photoUrl" : "https://lh6.googleusercontent.com/-PxDRhzqnR40/AAAAAAAAAAI/AAAAAAAACpQ/h_4OozlarA8/s96-c/photo.jpg"
+        },
+        "body" : "hi yy",
+        "timestamp" : 1465216291492
+      }
+    },
+    "🇫🇷" : {
+      "-KJMHuyToKyit3G1g65f" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "Hi",
+        "timestamp" : 1464974683566
+      },
+      "-KJ_oH9SiqP8o_G_nRBr" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "Bonjour ",
+        "timestamp" : 1465218310765
+      }
+    },
+    "🇬🇷" : {
+      "-KJ_oSXxmijDTXKCVsNX" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "Are you still there? ",
+        "timestamp" : 1465218357389
+      }
+    },
+    "🐱" : {
+      "-KJMV8SNYnEpVGGgsWNj" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "Meow",
+        "timestamp" : 1464978150326
+      },
+      "-KJ_fkfJ1GWNV7CDcu-T" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "Hello",
+        "timestamp" : 1465216076406
+      }
+    },
+    "📶" : {
+      "-KJ_oQJcbb23WDLSnVWs" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "No signal? ",
+        "timestamp" : 1465218348280
+      }
+    },
+    "🔥" : {
+      "-KJMVWbYwSBaYpDFPYKD" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "Bonfire! ",
+        "timestamp" : 1464978249280
+      }
+    },
+    "🔱" : {
+      "-KJ_oFKg1GHd4wbo4tTp" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "Hello",
+        "timestamp" : 1465218303292
+      }
+    },
+    "🙄" : {
+      "-KJ_oO3z42zgwhDbgcFo" : {
+        "author" : {
+          "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+          "name" : "Benjamin Augustin",
+          "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+        },
+        "body" : "Wut? ",
+        "timestamp" : 1465218339086
+      }
+    }
+  },
+  "owners" : {
+    "⏳" : {
+      "4Den9xkbelPpRlVD2fS0F5jABVj2" : true,
+      "KgdKEiBWl4d6dBCgDt4cNejMRHV2" : true,
+      "L9uAdEnVUmUervsmBCN1iNnNO2j2" : true
+    },
+    "➰" : {
+      "4Den9xkbelPpRlVD2fS0F5jABVj2" : true
+    },
+    "🐱" : {
+      "4Den9xkbelPpRlVD2fS0F5jABVj2" : true,
+      "KgdKEiBWl4d6dBCgDt4cNejMRHV2" : true,
+      "YwrnDqrvKVRPn4dal1HKkvbefdo1" : true,
+      "iNgZlOVhfoduNNZXxDT1RBdzoFu1" : true,
+      "uytPsqiByFgS7Hq9HBqdYb4LjMG3" : true
+    },
+    "🔥" : {
+      "4Den9xkbelPpRlVD2fS0F5jABVj2" : true,
+      "DwppLXQtoScTskm9fKY4ToF1oF22" : true,
+      "KgdKEiBWl4d6dBCgDt4cNejMRHV2" : true,
+      "YwrnDqrvKVRPn4dal1HKkvbefdo1" : true,
+      "b9uv0BcsiMVVU4kFMKECZqrVGCl2" : true,
+      "iNgZlOVhfoduNNZXxDT1RBdzoFu1" : true,
+      "uytPsqiByFgS7Hq9HBqdYb4LjMG3" : true
+    },
+    "🙅" : {
+      "YwrnDqrvKVRPn4dal1HKkvbefdo1" : true
+    }
+  },
+  "private-channels-index" : {
+    "4Den9xkbelPpRlVD2fS0F5jABVj2" : {
+      "⏳" : true,
+      "➰" : true,
+      "🐱" : true,
+      "🔥" : true
+    },
+    "DwppLXQtoScTskm9fKY4ToF1oF22" : {
+      "🔥" : true
+    },
+    "KgdKEiBWl4d6dBCgDt4cNejMRHV2" : {
+      "⏳" : true,
+      "🐱" : true,
+      "🔥" : true
+    },
+    "L9uAdEnVUmUervsmBCN1iNnNO2j2" : {
+      "⏳" : true
+    },
+    "YwrnDqrvKVRPn4dal1HKkvbefdo1" : {
+      "🐱" : true,
+      "🔥" : true,
+      "🙅" : true
+    },
+    "b9uv0BcsiMVVU4kFMKECZqrVGCl2" : {
+      "🔥" : true
+    },
+    "iNgZlOVhfoduNNZXxDT1RBdzoFu1" : {
+      "🐱" : true,
+      "🔥" : true
+    },
+    "uytPsqiByFgS7Hq9HBqdYb4LjMG3" : {
+      "🐱" : true,
+      "🔥" : true
+    }
+  },
+  "public-channels-index" : {
+    "♉" : true,
+    "✡" : true,
+    "🇨🇿" : true,
+    "🇪🇺" : true,
+    "🇫🇷" : true,
+    "🇬🇧" : true,
+    "🇬🇷" : true,
+    "📶" : true,
+    "🔱" : true,
+    "🙄" : true,
+    "🤐" : true
+  },
+  "users" : {
+    "0YTUTYbly0TrOWKE1i2lciIHWYG2" : {
+      "id" : "0YTUTYbly0TrOWKE1i2lciIHWYG2",
+      "name" : "Device Master",
+      "photoUrl" : ""
+    },
+    "4Den9xkbelPpRlVD2fS0F5jABVj2" : {
+      "id" : "4Den9xkbelPpRlVD2fS0F5jABVj2",
+      "name" : "Yvette Cook",
+      "photoUrl" : "https://lh3.googleusercontent.com/-5XYFuZp2EII/AAAAAAAAAAI/AAAAAAAAABI/WrUZuQyDHdg/s96-c/photo.jpg"
+    },
+    "4EC9326mg6XzWDHv0fc4gJMYiCC3" : {
+      "id" : "4EC9326mg6XzWDHv0fc4gJMYiCC3",
+      "name" : "Nuage Laboratoire",
+      "photoUrl" : ""
+    },
+    "DwppLXQtoScTskm9fKY4ToF1oF22" : {
+      "id" : "DwppLXQtoScTskm9fKY4ToF1oF22",
+      "name" : "Benjamin Augustin",
+      "photoUrl" : "https://lh3.googleusercontent.com/-OnT_u_IH1ZQ/AAAAAAAAAAI/AAAAAAAAARY/ANbUQnLWthA/s96-c/photo.jpg"
+    },
+    "FCE7jNz7DpUq3iMN3oU5tM8N9Cf1" : {
+      "id" : "FCE7jNz7DpUq3iMN3oU5tM8N9Cf1",
+      "name" : "Francesco Pontillo",
+      "photoUrl" : "https://lh5.googleusercontent.com/-hSCYAxtXE_I/AAAAAAAAAAI/AAAAAAAAABw/T3ukTcRR4Hc/s96-c/photo.jpg"
+    },
+    "KgdKEiBWl4d6dBCgDt4cNejMRHV2" : {
+      "id" : "KgdKEiBWl4d6dBCgDt4cNejMRHV2",
+      "name" : "Benjamin Augustin",
+      "photoUrl" : "https://lh6.googleusercontent.com/-SsQI2gHDqGc/AAAAAAAAAAI/AAAAAAAAKGU/nciFgeLz0GM/s96-c/photo.jpg"
+    },
+    "L9uAdEnVUmUervsmBCN1iNnNO2j2" : {
+      "id" : "L9uAdEnVUmUervsmBCN1iNnNO2j2",
+      "name" : "Carl-Gustaf Harroch",
+      "photoUrl" : "https://lh6.googleusercontent.com/-PxDRhzqnR40/AAAAAAAAAAI/AAAAAAAACpQ/h_4OozlarA8/s96-c/photo.jpg"
+    },
+    "PzaxBgxAhTgehJaEw9JFY2YW8Zj2" : {
+      "id" : "PzaxBgxAhTgehJaEw9JFY2YW8Zj2",
+      "name" : "Hal Novoda",
+      "photoUrl" : "https://lh4.googleusercontent.com/-liRFM9fpugE/AAAAAAAAAAI/AAAAAAAAAHg/Src0K0s_so0/s96-c/photo.jpg"
+    },
+    "YwrnDqrvKVRPn4dal1HKkvbefdo1" : {
+      "id" : "YwrnDqrvKVRPn4dal1HKkvbefdo1",
+      "name" : "Jozef Celuch",
+      "photoUrl" : "http://pbs.twimg.com/profile_images/725422706162851840/ikZMUwSp_normal.jpg"
+    },
+    "b9uv0BcsiMVVU4kFMKECZqrVGCl2" : {
+      "id" : "b9uv0BcsiMVVU4kFMKECZqrVGCl2",
+      "name" : "Joe Timmins",
+      "photoUrl" : ""
+    },
+    "iNgZlOVhfoduNNZXxDT1RBdzoFu1" : {
+      "id" : "iNgZlOVhfoduNNZXxDT1RBdzoFu1",
+      "name" : "Dominic Freeston",
+      "photoUrl" : "https://lh5.googleusercontent.com/-QLS5uJ7hvJM/AAAAAAAAAAI/AAAAAAAAADI/pGRYWIR97qU/s96-c/photo.jpg"
+    },
+    "uytPsqiByFgS7Hq9HBqdYb4LjMG3" : {
+      "id" : "uytPsqiByFgS7Hq9HBqdYb4LjMG3",
+      "name" : "Jozef Celuch",
+      "photoUrl" : "https://lh4.googleusercontent.com/-Uh-NsT3lcD8/AAAAAAAAAAI/AAAAAAAAACI/_vd_b3I8SeU/s96-c/photo.jpg"
+    }
+  }
+}
