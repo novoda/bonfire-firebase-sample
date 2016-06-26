@@ -162,7 +162,7 @@ class PersistedChannelServiceTests: XCTestCase {
         let expectedEvents = [
             next(0, Users(users: users))
         ]
-        
+
         XCTAssertEqual(testableUsersObserver.events, expectedEvents)
     }
 
@@ -215,7 +215,6 @@ class PersistedChannelServiceTests: XCTestCase {
         ]
 
         XCTAssertEqual(remembrancer.callStack, expectedMethodStack)
-        
+
     }
 }
-

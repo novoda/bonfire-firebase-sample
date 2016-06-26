@@ -1,12 +1,12 @@
 #Bonfire
 
-Awesome chat app where you can discuss your favorite emoji. 
+Awesome chat app where you can discuss your favorite emoji.
 
 ## Description
 
-Bonfire is built on top of the new [Firebase][1] from Google. 
+Bonfire is built on top of the new [Firebase][1] from Google.
 
-If you are interested in the iOS version, you can find more information about it [here][2]. 
+If you are interested in the iOS version, you can find more information about it [here][2].
 
 <a href="https://play.google.com/store/apps/details?id=com.novoda.bonfire&amp;utm_source=global_co&amp;utm_medium=prtnr&amp;utm_content=Mar2515&amp;utm_campaign=PartBadge&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" style="border: 0 none;"><img width="200" style="vertical-align:middle;text-decoration: none;" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"></a>
 <br/>
@@ -28,7 +28,7 @@ If you are interested in the iOS version, you can find more information about it
 3. Create a new project in the [Firebase console][3].
 
 4. Click *Add Firebase to your Android app*
-  * provide a **unique package name** 
+  * provide a **unique package name**
   * use the same package name for the **applicationId** in your `build.gradle`
   * insert SHA-1 fingerprint of your debug certificate, otherwise you won't be able to log in
 
@@ -39,7 +39,7 @@ If you are interested in the iOS version, you can find more information about it
 6. Copy contents of the `../server/database.rules.json` into your *Firebase -> Database -> Rules* and publish them.
 
 7. Enable **Google sign-in** in your *Firebase -> Auth -> Sign-in Method*.
- 
+
 8. Build and run the app.
 
 

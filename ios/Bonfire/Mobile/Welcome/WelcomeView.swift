@@ -109,5 +109,3 @@ extension WelcomeView: WelcomeDisplayer {
         }
     }
 }
-
-

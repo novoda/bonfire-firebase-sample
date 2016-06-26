@@ -15,4 +15,3 @@ target 'Bonfire' do
         pod 'RxTests',    '~> 2.0'
     end
 end
-
