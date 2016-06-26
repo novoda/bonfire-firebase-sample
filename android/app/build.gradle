@@ -12,21 +12,26 @@ android {
         versionName "1.0.0"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
+    def signingConfig = file("signing.properties")
     signingConfigs {
-        release {
-            Properties props = new Properties()
-            props.load(new FileInputStream(file("signing.properties")))
-            storeFile file(props['storeFile'])
-            storePassword props['storePassword']
-            keyAlias props['keyAlias']
-            keyPassword props['keyPassword']
+        if (signingConfig.exists()) {
+            release {
+                Properties props = new Properties()
+                props.load(new FileInputStream(file("signing.properties")))
+                storeFile file(props['storeFile'])
+                storePassword props['storePassword']
+                keyAlias props['keyAlias']
+                keyPassword props['keyPassword']
+            }
         }
     }
     buildTypes {
         release {
             minifyEnabled false
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (signingConfig.exists()) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     packagingOptions {
