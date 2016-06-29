@@ -31,5 +31,5 @@ final class LogoView: UIView  {
         logoImage.alignVerticalCenterWithSuperview()
         logoImage.alignHorizontalCenterWithSuperview()
     }
-    
+
 }

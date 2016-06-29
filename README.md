@@ -15,8 +15,8 @@ We like to keep on top of new technology at Novoda, so we decided to dedicate so
   * Channel members can add and remove members of a private channel
   * Remote configuration of the order of channels in the channels screen
   * Invite users to the app with a customised welcome screen
-  
-Bonfire is built on top of the new [Firebase][1] from Google. 
+
+Bonfire is built on top of the new [Firebase][1] from Google.
 It was built by a joint team working on the [iOS][2] and the [Android][3] version simultatiously.
 
 <a href="https://play.google.com/store/apps/details?id=com.novoda.bonfire&amp;utm_source=global_co&amp;utm_medium=prtnr&amp;utm_content=Mar2515&amp;utm_campaign=PartBadge&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" style="border: 0 none;"><img width="25%" height="25%" style="vertical-align:middle;text-decoration: none;" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"></a>

@@ -80,7 +80,7 @@ class PersistedChatServiceTests: XCTestCase {
 
         XCTAssertEqual(testableObserver.events, expectedEvents)
     }
-    
+
     func testThatItCallsTheSendMessageOnTheDatabase() {
         // Given
         let user = User(name: "TestUser", identifier: "1", photoURL: nil)
@@ -101,5 +101,5 @@ class PersistedChatServiceTests: XCTestCase {
         chatService.sendMessage(message, channel: channel)
         self.waitForExpectationsWithTimeout(0.1, handler: nil)
     }
-    
+
 }

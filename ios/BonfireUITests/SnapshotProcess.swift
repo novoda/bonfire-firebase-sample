@@ -9,7 +9,7 @@
 import XCTest
 
 class SnapshotProcess: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
@@ -18,7 +18,7 @@ class SnapshotProcess: XCTestCase {
         setupSnapshot(app)
         app.launch()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
