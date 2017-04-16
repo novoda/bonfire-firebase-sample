@@ -1,4 +1,4 @@
-#Bonfire [![](https://raw.githubusercontent.com/novoda/novoda/master/assets/btn_apache_lisence.png)](LICENSE.txt)
+# Bonfire [![](https://raw.githubusercontent.com/novoda/novoda/master/assets/btn_apache_lisence.png)](LICENSE.txt)
 
 One of the big announcements of Google IO 2016 was Firebase. No longer "just" a database, the Firebase umbrella now includes integrated Analytics, Crash Reporting, Push Messaging, Dynamic Links, Storage, Hosting, and more. Is this new platform ready for all your projects? Should you spend time learning everything about it?
 
@@ -6,7 +6,7 @@ We like to keep on top of new technology at Novoda, so we decided to dedicate so
 
 <img src="/android/app/src/main/ic_launcher-web.png" alt="Bonfire logo" width="200">
 
-###Bonfire features:
+### Bonfire features:
   * Real time chat organised into channels
   * Authentication using Google Sign-In
   * Channel names limited to one emoji on database level
