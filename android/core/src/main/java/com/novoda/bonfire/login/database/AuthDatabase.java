@@ -2,7 +2,7 @@ package com.novoda.bonfire.login.database;
 
 import com.novoda.bonfire.login.data.model.Authentication;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface AuthDatabase {
 

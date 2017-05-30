@@ -21,8 +21,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import rx.Observable;
-import rx.observers.TestObserver;
+import io.reactivex.Observable;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -89,7 +89,7 @@ public class PersistedChannelServiceTest {
         TestObserver<Channels> channelsTestObserver = new TestObserver<>();
         channelsObservable.subscribe(channelsTestObserver);
 
-        channelsTestObserver.assertReceivedOnNext(Collections.singletonList(new Channels(expectedList)));
+        channelsTestObserver.assertValues(new Channels(expectedList));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class PersistedChannelServiceTest {
         TestObserver<DatabaseResult<Users>> usersTestObserver = new TestObserver<>();
         channelsObservable.subscribe(usersTestObserver);
 
-        usersTestObserver.assertReceivedOnNext(Collections.singletonList(new DatabaseResult<>(expectedUsersList)));
+        usersTestObserver.assertValues(new DatabaseResult<>(expectedUsersList));
     }
 
     private Users buildExpectedUsers() {

@@ -7,9 +7,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.novoda.bonfire.rx.FirebaseObservableListeners;
 
-import rx.Observable;
-import rx.functions.Func1;
-import rx.observers.TestSubscriber;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
@@ -59,23 +59,23 @@ public class FirebaseTestHelpers {
     }
 
     public static <T> void assertValueReceivedOnNext(Observable<T> observable, T expectedValue) {
-        TestSubscriber<T> testSubscriber = testSubscriberFor(observable);
-        testSubscriber.assertValue(expectedValue);
+        TestObserver<T> testObserver = testObserverFor(observable);
+        testObserver.assertValue(expectedValue);
     }
 
     public static <T> void assertThrowableReceivedOnError(Observable<T> observable, Throwable throwable) {
-        TestSubscriber<T> testSubscriber = testSubscriberFor(observable);
-        testSubscriber.assertError(throwable);
+        TestObserver<T> testObserver = testObserverFor(observable);
+        testObserver.assertError(throwable);
     }
 
     @NonNull
-    private static <T> TestSubscriber<T> testSubscriberFor(Observable<T> observable) {
-        TestSubscriber<T> testSubscriber = new TestSubscriber<>();
-        observable.subscribe(testSubscriber);
-        return testSubscriber;
+    private static <T> TestObserver<T> testObserverFor(Observable<T> observable) {
+        TestObserver<T> testObserver = new TestObserver<>();
+        observable.subscribe(testObserver);
+        return testObserver;
     }
 
-    private static <T> Class<Func1<DataSnapshot, T>> marshallerType() {
-        return (Class<Func1<DataSnapshot, T>>) (Class) Func1.class;
+    private static <T> Class<Function<DataSnapshot, T>> marshallerType() {
+        return (Class<Function<DataSnapshot, T>>) (Class) Function.class;
     }
 }

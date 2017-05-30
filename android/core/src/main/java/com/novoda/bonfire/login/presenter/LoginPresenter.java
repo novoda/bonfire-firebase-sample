@@ -7,8 +7,9 @@ import com.novoda.bonfire.login.displayer.LoginDisplayer;
 import com.novoda.bonfire.login.service.LoginService;
 import com.novoda.bonfire.navigation.LoginNavigator;
 
-import rx.Subscription;
-import rx.functions.Action1;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public class LoginPresenter {
 
@@ -18,7 +19,7 @@ public class LoginPresenter {
     private final ErrorLogger errorLogger;
     private final Analytics analytics;
 
-    private Subscription subscription;
+    private Disposable subscription;
 
     public LoginPresenter(LoginService loginService,
                           LoginDisplayer loginDisplayer,
@@ -36,9 +37,9 @@ public class LoginPresenter {
         navigator.attach(loginResultListener);
         loginDisplayer.attach(actionListener);
         subscription = loginService.getAuthentication()
-                .subscribe(new Action1<Authentication>() {
+                .subscribe(new Consumer<Authentication>() {
                     @Override
-                    public void call(Authentication authentication) {
+                    public void accept(@NonNull Authentication authentication) throws Exception {
                         if (authentication.isSuccess()) {
                             navigator.toChannels();
                         } else {
@@ -52,7 +53,7 @@ public class LoginPresenter {
     public void stopPresenting() {
         navigator.detach(loginResultListener);
         loginDisplayer.detach(actionListener);
-        subscription.unsubscribe(); //TODO handle checks
+        subscription.dispose(); //TODO handle checks
     }
 
     private final LoginDisplayer.LoginActionListener actionListener = new LoginDisplayer.LoginActionListener() {

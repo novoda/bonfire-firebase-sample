@@ -3,7 +3,7 @@ package com.novoda.bonfire.user.database;
 import com.novoda.bonfire.user.data.model.User;
 import com.novoda.bonfire.user.data.model.Users;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface UserDatabase {
 

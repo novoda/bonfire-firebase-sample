@@ -4,7 +4,7 @@ import com.novoda.bonfire.channel.data.model.Channel;
 import com.novoda.bonfire.chat.data.model.Chat;
 import com.novoda.bonfire.chat.data.model.Message;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface ChatDatabase {
 

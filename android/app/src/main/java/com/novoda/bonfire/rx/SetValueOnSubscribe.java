@@ -3,10 +3,11 @@ package com.novoda.bonfire.rx;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
 
-class SetValueOnSubscribe<T, U> implements Observable.OnSubscribe<U> {
+class SetValueOnSubscribe<T, U> implements ObservableOnSubscribe<U> {
 
     private final T value;
     private final DatabaseReference databaseReference;
@@ -19,27 +20,27 @@ class SetValueOnSubscribe<T, U> implements Observable.OnSubscribe<U> {
     }
 
     @Override
-    public void call(Subscriber<? super U> subscriber) {
-        databaseReference.setValue(value, new RxCompletionListener<>(subscriber, returnValue));
+    public void subscribe(@NonNull ObservableEmitter<U> emitter) throws Exception {
+        databaseReference.setValue(value, new RxCompletionListener<>(emitter, returnValue));
     }
 
     private static class RxCompletionListener<T> implements DatabaseReference.CompletionListener {
 
-        private final Subscriber<? super T> subscriber;
+        private final ObservableEmitter<? super T> emitter;
         private final T successValue;
 
-        RxCompletionListener(Subscriber<? super T> subscriber, T successValue) {
-            this.subscriber = subscriber;
+        RxCompletionListener(ObservableEmitter<? super T> emitter, T successValue) {
+            this.emitter = emitter;
             this.successValue = successValue;
         }
 
         @Override
         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
             if (databaseError == null) {
-                subscriber.onNext(successValue);
-                subscriber.onCompleted();
+                emitter.onNext(successValue);
+                emitter.onComplete();
             } else {
-                subscriber.onError(databaseError.toException());
+                emitter.onError(databaseError.toException());
             }
         }
 

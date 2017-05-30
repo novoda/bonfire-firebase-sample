@@ -10,8 +10,9 @@ import com.novoda.bonfire.user.data.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 import static com.novoda.bonfire.channel.database.ChannelConverter.fromFirebaseChannel;
 import static com.novoda.bonfire.channel.database.ChannelConverter.toFirebaseChannel;
@@ -82,19 +83,19 @@ public class FirebaseChannelsDatabase implements ChannelsDatabase {
         return firebaseObservableListeners.listenToValueEvents(ownersDB.child(channel.getName()), getKeys());
     }
 
-    private static Func1<DataSnapshot, Channel> asChannel() {
-        return new Func1<DataSnapshot, Channel>() {
+    private static Function<DataSnapshot, Channel> asChannel() {
+        return new Function<DataSnapshot, Channel>() {
             @Override
-            public Channel call(DataSnapshot dataSnapshot) {
+            public Channel apply(@NonNull DataSnapshot dataSnapshot) throws Exception {
                 return fromFirebaseChannel(dataSnapshot.getValue(FirebaseChannel.class));
             }
         };
     }
 
-    private static Func1<DataSnapshot, List<String>> getKeys() {
-        return new Func1<DataSnapshot, List<String>>() {
+    private static Function<DataSnapshot, List<String>> getKeys() {
+        return new Function<DataSnapshot, List<String>>() {
             @Override
-            public List<String> call(DataSnapshot dataSnapshot) {
+            public List<String> apply(@NonNull DataSnapshot dataSnapshot) throws Exception {
                 List<String> keys = new ArrayList<>();
                 if (dataSnapshot.hasChildren()) {
                     Iterable<DataSnapshot> children = dataSnapshot.getChildren();

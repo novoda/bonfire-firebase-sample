@@ -13,10 +13,11 @@ import com.novoda.bonfire.login.service.LoginService;
 import com.novoda.bonfire.navigation.Navigator;
 import com.novoda.bonfire.user.data.model.User;
 
-import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func2;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
 
 import static com.novoda.bonfire.chat.presenter.ChatPresenter.Pair.asPair;
 
@@ -30,7 +31,7 @@ public class ChatPresenter {
     private final Navigator navigator;
     private final ErrorLogger errorLogger;
 
-    private CompositeSubscription subscriptions = new CompositeSubscription();
+    private CompositeDisposable subscriptions = new CompositeDisposable();
     private User user;
 
     public ChatPresenter(
@@ -60,9 +61,9 @@ public class ChatPresenter {
         chatDisplayer.disableInteraction();
         subscriptions.add(
                 Observable.combineLatest(chatService.getChat(channel), loginService.getAuthentication(), asPair())
-                        .subscribe(new Action1<Pair>() {
+                        .subscribe(new Consumer<Pair>() {
                             @Override
-                            public void call(Pair pair) {
+                            public void accept(@NonNull Pair pair) throws Exception {
                                 if (pair.auth.isSuccess()) {
                                     user = pair.auth.getUser();
                                     displayChat(pair);
@@ -87,7 +88,7 @@ public class ChatPresenter {
     public void stopPresenting() {
         chatDisplayer.detach(actionListener);
         subscriptions.clear(); //TODO sort out checks
-        subscriptions = new CompositeSubscription();
+        subscriptions = new CompositeDisposable();
     }
 
     private boolean userIsAuthenticated() {
@@ -132,10 +133,10 @@ public class ChatPresenter {
             this.auth = auth;
         }
 
-        static Func2<DatabaseResult<Chat>, Authentication, Pair> asPair() {
-            return new Func2<DatabaseResult<Chat>, Authentication, Pair>() {
+        static BiFunction<DatabaseResult<Chat>, Authentication, Pair> asPair() {
+            return new BiFunction<DatabaseResult<Chat>, Authentication, ChatPresenter.Pair>() {
                 @Override
-                public ChatPresenter.Pair call(DatabaseResult<Chat> chatDatabaseResult, Authentication authentication) {
+                public ChatPresenter.Pair apply(DatabaseResult<Chat> chatDatabaseResult, Authentication authentication) {
                     return new ChatPresenter.Pair(chatDatabaseResult, authentication);
                 }
             };

@@ -12,10 +12,12 @@ import com.novoda.bonfire.login.service.LoginService;
 import com.novoda.bonfire.navigation.Navigator;
 import com.novoda.bonfire.user.data.model.User;
 
-import rx.Observable;
-import rx.Subscription;
-import rx.functions.Action1;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 
 public class ChannelsPresenter {
 
@@ -27,7 +29,7 @@ public class ChannelsPresenter {
     private final LinkFactory linkFactory;
     private final Analytics analytics;
 
-    private Subscription subscription;
+    private Disposable subscription;
     private User user;
 
     public ChannelsPresenter(
@@ -52,35 +54,35 @@ public class ChannelsPresenter {
         channelsDisplayer.attach(channelsInteractionListener);
         subscription = loginService.getAuthentication()
                 .filter(successfullyAuthenticated())
-                .doOnNext(new Action1<Authentication>() {
+                .doOnNext(new Consumer<Authentication>() {
                     @Override
-                    public void call(Authentication authentication) {
+                    public void accept(@NonNull Authentication authentication) throws Exception {
                         user = authentication.getUser();
                     }
                 })
                 .flatMap(channelsForUser())
                 .map(sortIfConfigured())
-                .subscribe(new Action1<Channels>() {
+                .subscribe(new Consumer<Channels>() {
                     @Override
-                    public void call(Channels channels) {
+                    public void accept(@NonNull Channels channels) throws Exception {
                         channelsDisplayer.display(channels);
                     }
                 });
     }
 
-    private Func1<Authentication, Observable<Channels>> channelsForUser() {
-        return new Func1<Authentication, Observable<Channels>>() {
+    private Function<Authentication, Observable<Channels>> channelsForUser() {
+        return new Function<Authentication, Observable<Channels>>() {
             @Override
-            public Observable<Channels> call(Authentication authentication) {
+            public Observable<Channels> apply(@NonNull Authentication authentication) throws Exception {
                 return channelService.getChannelsFor(authentication.getUser());
             }
         };
     }
 
-    private Func1<Channels, Channels> sortIfConfigured() {
-        return new Func1<Channels, Channels>() {
+    private Function<Channels, Channels> sortIfConfigured() {
+        return new Function<Channels, Channels>() {
             @Override
-            public Channels call(Channels channels) {
+            public Channels apply(@NonNull Channels channels) throws Exception {
                 if (config.orderChannelsByName()) {
                     return channels.sortedByName();
                 } else {
@@ -90,17 +92,17 @@ public class ChannelsPresenter {
         };
     }
 
-    private Func1<Authentication, Boolean> successfullyAuthenticated() {
-        return new Func1<Authentication, Boolean>() {
+    private Predicate<? super Authentication> successfullyAuthenticated() {
+        return new Predicate<Authentication>() {
             @Override
-            public Boolean call(Authentication authentication) {
+            public boolean test(@NonNull Authentication authentication) throws Exception {
                 return authentication.isSuccess();
             }
         };
     }
 
     public void stopPresenting() {
-        subscription.unsubscribe();
+        subscription.dispose();
         channelsDisplayer.detach(channelsInteractionListener);
     }
 

@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 import static com.novoda.bonfire.helpers.FirebaseTestHelpers.*;
 import static org.mockito.Matchers.any;

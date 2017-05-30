@@ -8,7 +8,7 @@ public interface LoginDisplayer {
 
     void showAuthenticationError(String message);
 
-    public interface LoginActionListener {
+    interface LoginActionListener {
 
         void onGooglePlusLoginSelected();
 
