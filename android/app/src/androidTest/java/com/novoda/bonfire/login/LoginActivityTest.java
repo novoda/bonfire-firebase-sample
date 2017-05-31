@@ -8,6 +8,8 @@ import android.support.test.runner.AndroidJUnit4;
 import com.google.android.gms.common.SignInButton;
 import com.novoda.bonfire.R;
 import com.novoda.bonfire.TestDependencies;
+import com.novoda.bonfire.channel.data.model.Channels;
+import com.novoda.bonfire.channel.service.ChannelService;
 import com.novoda.bonfire.login.data.model.Authentication;
 import com.novoda.bonfire.login.service.LoginService;
 import com.novoda.bonfire.user.data.model.User;
@@ -18,7 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -29,6 +31,8 @@ import static org.mockito.Mockito.when;
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest {
 
+    private static final User SUCCESSFUL_AUTH_USER = new User("id", "name", "http://photo.url");
+
     @Rule
     public ActivityTestRule<LoginActivity> activity = new ActivityTestRule<>(LoginActivity.class, false, false);
     private Authentication authentication;
@@ -36,11 +40,15 @@ public class LoginActivityTest {
     @Before
     public void setUp() throws Exception {
         LoginService loginService = Mockito.mock(LoginService.class);
+        ChannelService channelService = Mockito.mock(ChannelService.class);
         authentication = Mockito.mock(Authentication.class);
+
         when(loginService.getAuthentication()).thenReturn(Observable.just(authentication));
+        when(channelService.getChannelsFor(SUCCESSFUL_AUTH_USER)).thenReturn(Observable.<Channels>empty());
 
         TestDependencies.init()
-                .withLoginService(loginService);
+                .withLoginService(loginService)
+                .withChannelService(channelService);
     }
 
     @Test
@@ -67,15 +75,15 @@ public class LoginActivityTest {
 
         activity.launchActivity(new Intent());
 
-        assertThatScreenWIthChannelsIsShown();
+        assertThatScreenWithChannelsIsShown();
     }
 
     private void givenAuthenticationIsSuccessful() {
         when(authentication.isSuccess()).thenReturn(true);
-        when(authentication.getUser()).thenReturn(new User("id", "name", "http://photo.url"));
+        when(authentication.getUser()).thenReturn(SUCCESSFUL_AUTH_USER);
     }
 
-    private ViewInteraction assertThatScreenWIthChannelsIsShown() {
+    private ViewInteraction assertThatScreenWithChannelsIsShown() {
         return onView(withId(R.id.channels)).check(matches(isDisplayed()));
     }
 

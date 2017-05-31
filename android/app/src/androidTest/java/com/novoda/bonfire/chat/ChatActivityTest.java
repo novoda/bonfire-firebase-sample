@@ -26,9 +26,9 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.subjects.PublishSubject;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.subjects.PublishSubject;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.*;
@@ -132,7 +132,7 @@ public class ChatActivityTest {
         doAnswer(new Answer<Observable<DatabaseResult<Chat>>>() {
             @Override
             public Observable<DatabaseResult<Chat>> answer(InvocationOnMock invocation) throws Throwable {
-                return subject.asObservable()
+                return subject
                         .observeOn(AndroidSchedulers.mainThread())
                         .startWith(CHAT);
             }
