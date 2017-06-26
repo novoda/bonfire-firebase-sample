@@ -5,53 +5,57 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.functions.Func1;
-import rx.subscriptions.BooleanSubscription;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Cancellable;
+import io.reactivex.functions.Function;
 
-class ListenToValueEventsOnSubscribe<T> implements Observable.OnSubscribe<T> {
+class ListenToValueEventsOnSubscribe<T> implements ObservableOnSubscribe<T> {
 
     private final Query query;
-    private final Func1<DataSnapshot, T> marshaller;
+    private final Function<DataSnapshot, T> marshaller;
 
-    ListenToValueEventsOnSubscribe(Query query, Func1<DataSnapshot, T> marshaller) {
+    ListenToValueEventsOnSubscribe(Query query, Function<DataSnapshot, T> marshaller) {
         this.query = query;
         this.marshaller = marshaller;
     }
 
     @Override
-    public void call(Subscriber<? super T> subscriber) {
-        final ValueEventListener eventListener = query.addValueEventListener(new RxValueListener<>(subscriber, marshaller));
-        subscriber.add(BooleanSubscription.create(new Action0() {
+    public void subscribe(@NonNull ObservableEmitter<T> emitter) throws Exception {
+        final ValueEventListener eventListener = query.addValueEventListener(new RxValueListener<>(emitter, marshaller));
+        emitter.setCancellable(new Cancellable() {
             @Override
-            public void call() {
+            public void cancel() throws Exception {
                 query.removeEventListener(eventListener);
             }
-        }));
+        });
     }
 
     private static class RxValueListener<T> implements ValueEventListener {
 
-        private final Subscriber<? super T> subscriber;
-        private final Func1<DataSnapshot, T> marshaller;
+        private final ObservableEmitter<? super T> emitter;
+        private final Function<DataSnapshot, T> marshaller;
 
-        RxValueListener(Subscriber<? super T> subscriber, Func1<DataSnapshot, T> marshaller) {
-            this.subscriber = subscriber;
+        RxValueListener(ObservableEmitter<T> emitter, Function<DataSnapshot, T> marshaller) {
+            this.emitter = emitter;
             this.marshaller = marshaller;
         }
 
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            if (!subscriber.isUnsubscribed()) {
-                subscriber.onNext(marshaller.call(dataSnapshot));
+            if (!emitter.isDisposed()) {
+                try {
+                    emitter.onNext(marshaller.apply(dataSnapshot));
+                } catch (Exception e) {
+                    emitter.onError(e);
+                }
             }
         }
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
-            subscriber.onError(databaseError.toException()); //TODO handle errors in pipeline
+            emitter.onError(databaseError.toException()); //TODO handle errors in pipeline
         }
 
     }

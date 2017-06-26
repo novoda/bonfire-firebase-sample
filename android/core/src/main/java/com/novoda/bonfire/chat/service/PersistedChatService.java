@@ -6,8 +6,9 @@ import com.novoda.bonfire.chat.data.model.Message;
 import com.novoda.bonfire.chat.database.ChatDatabase;
 import com.novoda.bonfire.database.DatabaseResult;
 
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 public class PersistedChatService implements ChatService {
 
@@ -24,10 +25,10 @@ public class PersistedChatService implements ChatService {
                 .onErrorReturn(DatabaseResult.<Chat>errorAsDatabaseResult());
     }
 
-    private static Func1<Chat, DatabaseResult<Chat>> asDatabaseResult() {
-        return new Func1<Chat, DatabaseResult<Chat>>() {
+    private static Function<Chat, DatabaseResult<Chat>> asDatabaseResult() {
+        return new Function<Chat, DatabaseResult<Chat>>() {
             @Override
-            public DatabaseResult<Chat> call(Chat chat) {
+            public DatabaseResult<Chat> apply(@NonNull Chat chat) throws Exception {
                 return new DatabaseResult<Chat>(chat);
             }
         };

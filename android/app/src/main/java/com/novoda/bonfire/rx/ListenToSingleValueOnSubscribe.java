@@ -5,46 +5,51 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
-class ListenToSingleValueOnSubscribe<T> implements Observable.OnSubscribe<T> {
+class ListenToSingleValueOnSubscribe<T> implements ObservableOnSubscribe<T> {
 
     private final Query query;
-    private final Func1<DataSnapshot, T> marshaller;
+    private final Function<DataSnapshot, T> marshaller;
 
-    ListenToSingleValueOnSubscribe(Query query, Func1<DataSnapshot, T> marshaller) {
+    ListenToSingleValueOnSubscribe(Query query, Function<DataSnapshot, T> marshaller) {
         this.query = query;
         this.marshaller = marshaller;
     }
 
     @Override
-    public void call(Subscriber<? super T> subscriber) {
-        query.addListenerForSingleValueEvent(new RxSingleValueListener<>(subscriber, marshaller));
+    public void subscribe(@NonNull ObservableEmitter<T> emitter) throws Exception {
+        query.addListenerForSingleValueEvent(new RxSingleValueListener<>(emitter, marshaller));
     }
 
     private static class RxSingleValueListener<T> implements ValueEventListener {
 
-        private final Subscriber<? super T> subscriber;
-        private final Func1<DataSnapshot, T> marshaller;
+        private final ObservableEmitter<? super T> emitter;
+        private final Function<DataSnapshot, T> marshaller;
 
-        public RxSingleValueListener(Subscriber<? super T> subscriber, Func1<DataSnapshot, T> marshaller) {
-            this.subscriber = subscriber;
+        public RxSingleValueListener(ObservableEmitter<T> emitter, Function<DataSnapshot, T> marshaller) {
+            this.emitter = emitter;
             this.marshaller = marshaller;
         }
 
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            if (dataSnapshot.hasChildren() && !subscriber.isUnsubscribed()) {
-                subscriber.onNext(marshaller.call(dataSnapshot));
+            if (dataSnapshot.hasChildren() && !emitter.isDisposed()) {
+                try {
+                    emitter.onNext(marshaller.apply(dataSnapshot));
+                } catch (Exception e) {
+                    emitter.onError(e);
+                }
             }
-            subscriber.onCompleted();
+            emitter.onComplete();
         }
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
-            subscriber.onError(databaseError.toException()); //TODO handle errors in pipeline
+            emitter.onError(databaseError.toException()); //TODO handle errors in pipeline
         }
 
     }

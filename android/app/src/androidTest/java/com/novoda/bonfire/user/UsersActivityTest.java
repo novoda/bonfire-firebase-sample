@@ -30,9 +30,9 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.subjects.PublishSubject;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.subjects.PublishSubject;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -127,7 +127,7 @@ public class UsersActivityTest {
         doAnswer(new Answer<Observable<DatabaseResult<Users>>>() {
             @Override
             public Observable<DatabaseResult<Users>> answer(InvocationOnMock invocation) throws Throwable {
-                return subject.asObservable().observeOn(AndroidSchedulers.mainThread());
+                return subject.observeOn(AndroidSchedulers.mainThread());
             }
         }).when(channelService).getOwnersOfChannel(any(Channel.class));
 

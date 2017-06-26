@@ -11,8 +11,9 @@ import com.novoda.bonfire.user.data.model.Users;
 import com.novoda.bonfire.user.displayer.UsersDisplayer;
 import com.novoda.bonfire.user.service.UserService;
 
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 public class UsersPresenter {
     private final UserService userService;
@@ -22,7 +23,7 @@ public class UsersPresenter {
     private final Navigator navigator;
     private final ErrorLogger errorLogger;
     private final Analytics analytics;
-    private CompositeSubscription subscriptions = new CompositeSubscription();
+    private CompositeDisposable subscriptions = new CompositeDisposable();
 
     public UsersPresenter(UserService userService,
                           ChannelService channelService,
@@ -44,18 +45,18 @@ public class UsersPresenter {
         usersDisplayer.attach(selectionListener);
 
         subscriptions.add(
-                userService.getAllUsers().subscribe(new Action1<Users>() {
+                userService.getAllUsers().subscribe(new Consumer<Users>() {
                     @Override
-                    public void call(Users users) {
+                    public void accept(@NonNull Users users) throws Exception {
                         usersDisplayer.display(users);
                     }
                 })
         );
         subscriptions.add(
                 channelService.getOwnersOfChannel(channel)
-                        .subscribe(new Action1<DatabaseResult<Users>>() {
+                        .subscribe(new Consumer<DatabaseResult<Users>>() {
                             @Override
-                            public void call(DatabaseResult<Users> databaseResult) {
+                            public void accept(@NonNull DatabaseResult<Users> databaseResult) throws Exception {
                                 if (databaseResult.isSuccess()) {
                                     usersDisplayer.displaySelectedUsers(databaseResult.getData());
                                 } else {
@@ -70,7 +71,7 @@ public class UsersPresenter {
     public void stopPresenting() {
         usersDisplayer.detach(selectionListener);
         subscriptions.clear();
-        subscriptions = new CompositeSubscription();
+        subscriptions = new CompositeDisposable();
     }
 
     private UsersDisplayer.SelectionListener selectionListener = new UsersDisplayer.SelectionListener() {
@@ -94,10 +95,10 @@ public class UsersPresenter {
         }
     };
 
-    private Action1<DatabaseResult<User>> updateOnActionResult() {
-        return new Action1<DatabaseResult<User>>() {
+    private Consumer<DatabaseResult<User>> updateOnActionResult() {
+        return new Consumer<DatabaseResult<User>>() {
             @Override
-            public void call(DatabaseResult<User> userDatabaseResult) {
+            public void accept(@NonNull DatabaseResult<User> userDatabaseResult) throws Exception {
                 if (!userDatabaseResult.isSuccess()) {
                     errorLogger.reportError(userDatabaseResult.getFailure(), "Cannot update channel owners");
                     usersDisplayer.showFailure();

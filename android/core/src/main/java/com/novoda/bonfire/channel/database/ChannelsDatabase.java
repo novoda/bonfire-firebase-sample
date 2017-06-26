@@ -5,7 +5,7 @@ import com.novoda.bonfire.user.data.model.User;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface ChannelsDatabase {
 

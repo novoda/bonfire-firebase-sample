@@ -13,8 +13,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.novoda.bonfire.login.data.model.Authentication;
 import com.novoda.bonfire.user.data.model.User;
 
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 
 public class FirebaseAuthDatabase implements AuthDatabase {
 
@@ -26,23 +27,23 @@ public class FirebaseAuthDatabase implements AuthDatabase {
 
     @Override
     public Observable<Authentication> readAuthentication() {
-        return Observable.create(new Observable.OnSubscribe<Authentication>() {
+        return Observable.create(new ObservableOnSubscribe<Authentication>() {
             @Override
-            public void call(Subscriber<? super Authentication> subscriber) {
+            public void subscribe(@NonNull ObservableEmitter<Authentication> emitter) throws Exception {
                 FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                 if (currentUser != null) {
-                    subscriber.onNext(authenticationFrom(currentUser));
+                    emitter.onNext(authenticationFrom(currentUser));
                 }
-                subscriber.onCompleted();
+                emitter.onComplete();
             }
         });
     }
 
     @Override
     public Observable<Authentication> loginWithGoogle(final String idToken) {
-        return Observable.create(new Observable.OnSubscribe<Authentication>() {
+        return Observable.create(new ObservableOnSubscribe<Authentication>() {
             @Override
-            public void call(final Subscriber<? super Authentication> subscriber) {
+            public void subscribe(@NonNull final ObservableEmitter<Authentication> emitter) throws Exception {
                 AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
                 firebaseAuth.signInWithCredential(credential)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -50,11 +51,11 @@ public class FirebaseAuthDatabase implements AuthDatabase {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     FirebaseUser firebaseUser = task.getResult().getUser();
-                                    subscriber.onNext(authenticationFrom(firebaseUser));
+                                    emitter.onNext(authenticationFrom(firebaseUser));
                                 } else {
-                                    subscriber.onNext(new Authentication(task.getException()));
+                                    emitter.onNext(new Authentication(task.getException()));
                                 }
-                                subscriber.onCompleted();
+                                emitter.onComplete();
                             }
                         });
             }

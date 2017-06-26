@@ -6,7 +6,7 @@ import com.novoda.bonfire.database.DatabaseResult;
 import com.novoda.bonfire.user.data.model.User;
 import com.novoda.bonfire.user.data.model.Users;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface ChannelService {
 

@@ -11,9 +11,10 @@ import com.novoda.bonfire.login.service.LoginService;
 import com.novoda.bonfire.navigation.Navigator;
 import com.novoda.bonfire.user.data.model.User;
 
-import rx.Observable;
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 public class NewChannelPresenter {
 
@@ -23,7 +24,7 @@ public class NewChannelPresenter {
     private final Navigator navigator;
     private final ErrorLogger errorLogger;
     private User user;
-    private CompositeSubscription subscriptions = new CompositeSubscription();
+    private CompositeDisposable subscriptions = new CompositeDisposable();
 
     public NewChannelPresenter(NewChannelDisplayer newChannelDisplayer,
                                ChannelService channelService,
@@ -40,9 +41,9 @@ public class NewChannelPresenter {
     public void startPresenting() {
         newChannelDisplayer.attach(channelCreationListener);
         subscriptions.add(
-                loginService.getAuthentication().subscribe(new Action1<Authentication>() {
+                loginService.getAuthentication().subscribe(new Consumer<Authentication>() {
                     @Override
-                    public void call(Authentication authentication) {
+                    public void accept(@NonNull Authentication authentication) throws Exception {
                         user = authentication.getUser();
                     }
                 })
@@ -52,7 +53,7 @@ public class NewChannelPresenter {
     public void stopPresenting() {
         newChannelDisplayer.detach(channelCreationListener);
         subscriptions.clear();
-        subscriptions = new CompositeSubscription();
+        subscriptions = new CompositeDisposable();
     }
 
     private NewChannelDisplayer.ChannelCreationListener channelCreationListener = new NewChannelDisplayer.ChannelCreationListener() {
@@ -61,9 +62,9 @@ public class NewChannelPresenter {
         public void onCreateChannelClicked(String channelName, boolean isPrivate) {
             Channel newChannel = new Channel(channelName.trim(), isPrivate ? Access.PRIVATE : Access.PUBLIC);
             subscriptions.add(
-                    create(newChannel).subscribe(new Action1<DatabaseResult<Channel>>() {
+                    create(newChannel).subscribe(new Consumer<DatabaseResult<Channel>>() {
                         @Override
-                        public void call(DatabaseResult<Channel> databaseResult) {
+                        public void accept(@NonNull DatabaseResult<Channel> databaseResult) throws Exception {
                             if (databaseResult.isSuccess()) {
                                 navigator.toChannelWithClearedHistory(databaseResult.getData());
                             } else {

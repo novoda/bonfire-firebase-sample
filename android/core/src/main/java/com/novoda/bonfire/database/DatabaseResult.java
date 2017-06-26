@@ -1,16 +1,17 @@
 package com.novoda.bonfire.database;
 
-import rx.functions.Func1;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 public class DatabaseResult<T> {
 
     private final Throwable failure;
     private final T data;
 
-    public static  <T> Func1<Throwable, DatabaseResult<T>> errorAsDatabaseResult() {
-        return new Func1<Throwable, DatabaseResult<T>>() {
+    public static  <T> Function<Throwable, DatabaseResult<T>> errorAsDatabaseResult() {
+        return new Function<Throwable, DatabaseResult<T>>() {
             @Override
-            public DatabaseResult<T> call(Throwable throwable) {
+            public DatabaseResult<T> apply(@NonNull Throwable throwable) throws Exception {
                 return new DatabaseResult<>(throwable == null ? new Throwable("Database error is missing") : throwable);
             }
         };

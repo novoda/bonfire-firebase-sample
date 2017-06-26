@@ -11,8 +11,9 @@ import com.novoda.bonfire.rx.FirebaseObservableListeners;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 public class FirebaseChatDatabase implements ChatDatabase {
 
@@ -40,10 +41,10 @@ public class FirebaseChatDatabase implements ChatDatabase {
         return messagesDB.child(channel.getName());
     }
 
-    private Func1<DataSnapshot, Chat> toChat() {
-        return new Func1<DataSnapshot, Chat>() {
+    private Function<DataSnapshot, Chat> toChat() {
+        return new Function<DataSnapshot, Chat>() {
             @Override
-            public Chat call(DataSnapshot dataSnapshot) {
+            public Chat apply(@NonNull DataSnapshot dataSnapshot) throws Exception {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 List<Message> messages = new ArrayList<>();
                 for (DataSnapshot child : children) {

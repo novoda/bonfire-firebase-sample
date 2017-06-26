@@ -4,7 +4,7 @@ import com.novoda.bonfire.user.data.model.User;
 import com.novoda.bonfire.user.data.model.Users;
 import com.novoda.bonfire.user.database.UserDatabase;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class PersistedUserService implements UserService {
 

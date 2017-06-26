@@ -1,8 +1,8 @@
 apply plugin: 'java'
 
 dependencies {
-    compile 'io.reactivex:rxjava:1.1.5'
-    compile 'com.jakewharton.rxrelay:rxrelay:1.1.0'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
     compile 'junit:junit:4.12'
     compile 'org.mockito:mockito-core:1.9.5'
 }

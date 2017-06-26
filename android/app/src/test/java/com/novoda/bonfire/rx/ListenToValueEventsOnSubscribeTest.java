@@ -4,15 +4,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Collections;
-
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import rx.Observable;
-import rx.functions.Func1;
-import rx.observers.TestObserver;
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -43,13 +42,13 @@ public class ListenToValueEventsOnSubscribeTest {
         TestObserver<String> testObserver = new TestObserver<>();
         observable.subscribe(testObserver);
 
-        testObserver.assertReceivedOnNext(Collections.singletonList(EXPECTED_KEY));
+        testObserver.assertValues(EXPECTED_KEY);
     }
 
-    private static Func1<DataSnapshot, String> getKey() {
-        return new Func1<DataSnapshot, String>() {
+    private static Function<DataSnapshot, String> getKey() {
+        return new Function<DataSnapshot, String>() {
             @Override
-            public String call(DataSnapshot dataSnapshot) {
+            public String apply(@NonNull DataSnapshot dataSnapshot) throws Exception {
                 return dataSnapshot.getKey();
             }
         };

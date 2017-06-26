@@ -7,8 +7,9 @@ import com.novoda.bonfire.user.service.UserService;
 import com.novoda.bonfire.welcome.displayer.WelcomeDisplayer;
 import com.novoda.bonfire.welcome.displayer.WelcomeDisplayer.InteractionListener;
 
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 public class WelcomePresenter {
 
@@ -18,7 +19,7 @@ public class WelcomePresenter {
     private final Analytics analytics;
     private final String senderId;
 
-    private CompositeSubscription subscriptions = new CompositeSubscription();
+    private CompositeDisposable subscriptions = new CompositeDisposable();
 
     public WelcomePresenter(UserService userService, WelcomeDisplayer welcomeDisplayer, Navigator navigator, Analytics analytics, String senderId) {
         this.userService = userService;
@@ -32,9 +33,9 @@ public class WelcomePresenter {
         welcomeDisplayer.attach(interactionListener);
         analytics.trackInvitationOpened(senderId);
         subscriptions.add(
-                userService.getUser(senderId).subscribe(new Action1<User>() {
+                userService.getUser(senderId).subscribe(new Consumer<User>() {
                     @Override
-                    public void call(User user) {
+                    public void accept(@NonNull User user) throws Exception {
                         welcomeDisplayer.display(user);
                     }
                 })
@@ -44,7 +45,7 @@ public class WelcomePresenter {
     public void stopPresenting() {
         welcomeDisplayer.detach(interactionListener);
         subscriptions.clear(); //TODO sort out checks
-        subscriptions = new CompositeSubscription();
+        subscriptions = new CompositeDisposable();
     }
 
     private final InteractionListener interactionListener = new InteractionListener() {

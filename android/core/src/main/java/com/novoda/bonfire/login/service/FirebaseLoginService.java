@@ -1,13 +1,16 @@
 package com.novoda.bonfire.login.service;
 
-import com.jakewharton.rxrelay.BehaviorRelay;
+import com.jakewharton.rxrelay2.BehaviorRelay;
 import com.novoda.bonfire.login.data.model.Authentication;
 import com.novoda.bonfire.login.database.AuthDatabase;
 import com.novoda.bonfire.user.database.UserDatabase;
 
-import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func0;
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 public class FirebaseLoginService implements LoginService {
 
@@ -28,9 +31,9 @@ public class FirebaseLoginService implements LoginService {
     }
 
     private Observable<Authentication> initRelay() {
-        return Observable.defer(new Func0<Observable<Authentication>>() {
+        return Observable.defer(new Callable<ObservableSource<? extends Authentication>>() {
             @Override
-            public Observable<Authentication> call() {
+            public ObservableSource<? extends Authentication> call() throws Exception {
                 if (authRelay.hasValue() && authRelay.getValue().isSuccess()) {
                     return Observable.empty();
                 } else {
@@ -43,19 +46,20 @@ public class FirebaseLoginService implements LoginService {
     private Observable<Authentication> fetchUser() {
         return authDatabase.readAuthentication()
                 .doOnNext(authRelay)
-                .ignoreElements();
+                .ignoreElements()
+                .toObservable();
     }
 
     @Override
     public void loginWithGoogle(String idToken) {
         authDatabase.loginWithGoogle(idToken)
-                .subscribe(new Action1<Authentication>() {
+                .subscribe(new Consumer<Authentication>() {
                     @Override
-                    public void call(Authentication authentication) {
+                    public void accept(@NonNull Authentication authentication) throws Exception {
                         if (authentication.isSuccess()) {
                             userDatabase.writeCurrentUser(authentication.getUser());
                         }
-                        authRelay.call(authentication);
+                        authRelay.accept(authentication);
                     }
                 });
     }
