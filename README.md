@@ -1,3 +1,5 @@
+# 🛑 THIS REPOSITORY IS OFFICIALLY NO LONGER UNDER MAINTENANCE since 10/02/2022 🛑
+
 # Bonfire [![](https://raw.githubusercontent.com/novoda/novoda/master/assets/btn_apache_lisence.png)](LICENSE.txt)
 
 One of the big announcements of Google IO 2016 was Firebase. No longer "just" a database, the Firebase umbrella now includes integrated Analytics, Crash Reporting, Push Messaging, Dynamic Links, Storage, Hosting, and more. Is this new platform ready for all your projects? Should you spend time learning everything about it?
